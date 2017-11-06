@@ -202,8 +202,8 @@ namespace fsw
   {
     vector<fsw_event_flag> flags;
 
-    if (event->mask & IN_ISDIR) flags.push_back(fsw_event_flag::IsDir);
-    if (event->mask & IN_MOVE_SELF) flags.push_back(fsw_event_flag::Updated);
+    //if (event->mask & IN_ISDIR) flags.push_back(fsw_event_flag::IsDir);
+    //if (event->mask & IN_MOVE_SELF) flags.push_back(fsw_event_flag::Updated);
     if (event->mask & IN_UNMOUNT) flags.push_back(fsw_event_flag::PlatformSpecific);
 
     if (flags.size())
@@ -222,24 +222,24 @@ namespace fsw
   {
     vector<fsw_event_flag> flags;
 
-    if (event->mask & IN_ACCESS) flags.push_back(fsw_event_flag::PlatformSpecific);
-    if (event->mask & IN_ATTRIB) flags.push_back(fsw_event_flag::AttributeModified);
-    if (event->mask & IN_CLOSE_NOWRITE) flags.push_back(fsw_event_flag::PlatformSpecific);
+    //if (event->mask & IN_ACCESS) flags.push_back(fsw_event_flag::PlatformSpecific);
+    //if (event->mask & IN_ATTRIB) flags.push_back(fsw_event_flag::AttributeModified);
+    //if (event->mask & IN_CLOSE_NOWRITE) flags.push_back(fsw_event_flag::PlatformSpecific);
     if (event->mask & IN_CLOSE_WRITE) flags.push_back(fsw_event_flag::Updated);
     if (event->mask & IN_CREATE) flags.push_back(fsw_event_flag::Created);
     if (event->mask & IN_DELETE) flags.push_back(fsw_event_flag::Removed);
-    if (event->mask & IN_MODIFY) flags.push_back(fsw_event_flag::Updated);
-    if (event->mask & IN_MOVED_FROM)
-    {
-      flags.push_back(fsw_event_flag::Removed);
-      flags.push_back(fsw_event_flag::MovedFrom);
-    }
-    if (event->mask & IN_MOVED_TO)
-    {
-      flags.push_back(fsw_event_flag::Created);
-      flags.push_back(fsw_event_flag::MovedTo);
-    }
-    if (event->mask & IN_OPEN) flags.push_back(fsw_event_flag::PlatformSpecific);
+    //if (event->mask & IN_MODIFY) flags.push_back(fsw_event_flag::Updated);
+    // if (event->mask & IN_MOVED_FROM)
+    // {
+    //   flags.push_back(fsw_event_flag::Removed);
+    //   flags.push_back(fsw_event_flag::MovedFrom);
+    // }
+    // if (event->mask & IN_MOVED_TO)
+    // {
+    //   flags.push_back(fsw_event_flag::Created);
+    //   flags.push_back(fsw_event_flag::MovedTo);
+    // }
+    // if (event->mask & IN_OPEN) flags.push_back(fsw_event_flag::PlatformSpecific);
 
     // Build the file name.
     ostringstream filename_stream;
@@ -258,7 +258,7 @@ namespace fsw
 
     {
       ostringstream log;
-      log << _("Generic event: ") << event->wd << "::" << filename_stream.str() << "\n";
+      log << _("Generic event: WD:") << event->wd << " Mask:" << std::hex << event->mask << " Path:" << filename_stream.str() << "\n";
       FSW_ELOG(log.str().c_str());
     }
 
